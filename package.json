@@ -1,6 +1,6 @@
 {
   "name": "eluded-screepsmod-inspector",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "v8 inspector support for screeps",
   "main": "inspector.js",
   "author": "https://github.com/benjamingorman/eluded-screepsmod-inspector",
