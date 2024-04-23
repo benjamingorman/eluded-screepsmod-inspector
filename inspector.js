@@ -4,7 +4,8 @@ const route = require("koa-route");
 const websockify = require("koa-websocket");
 const ivm = require("isolated-vm");
 
-const MOD_NAME = "screepsmod-inspector";
+const VERSION = "0.0.3";
+const MOD_NAME = `screepsmod-inspector@${VERSION}`;
 
 // Check to see if this is `runner.js`
 let runnerEndpoint;
@@ -70,13 +71,16 @@ ${(() => {
 			console.log(`[${MOD_NAME}] ws /inspect/:userId`, userId);
 			const sandbox = playerSandboxes.get(userId);
 			const ws = ctx.websocket;
+
 			if (sandbox === undefined) {
 				ctx.websocket.close();
 				return;
 			}
+
 			// Setup inspector session
 			const channel = sandbox.getIsolate().createInspectorSession();
 			function dispose() {
+				console.log(`[${MOD_NAME}] dispose`);
 				try {
 					channel.dispose();
 				} catch (err) {}
@@ -86,6 +90,7 @@ ${(() => {
 
 			// Relay messages from frontend to backend
 			ws.on("message", (message) => {
+				console.log(`[${MOD_NAME}] got ws message:`, message);
 				try {
 					channel.dispatchProtocolMessage(message);
 				} catch (err) {
@@ -97,6 +102,7 @@ ${(() => {
 
 			// Relay messages from backend to frontend
 			function send(message) {
+				console.log(`[${MOD_NAME}] send ws message:`, message);
 				try {
 					ws.send(message);
 				} catch (err) {
