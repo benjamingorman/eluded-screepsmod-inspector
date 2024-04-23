@@ -1,14 +1,15 @@
 {
-  "name": "screepsmod-inspector",
+  "name": "eluded-screepsmod-inspector",
   "version": "0.0.1",
   "description": "v8 inspector support for screeps",
   "main": "inspector.js",
-  "author": "https://github.com/laverdet/",
+  "author": "https://github.com/benjamingorman/eluded-screepsmod-inspector",
   "license": "ISC",
   "dependencies": {
     "dateformat": "^3.0.3",
     "koa": "^2.5.0",
     "koa-route": "^3.2.0",
     "koa-websocket": "^4.1.0"
-  }
+  },
+  "screeps_mod": true
 }
